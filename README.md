@@ -1,1 +1,1 @@
-# JLN jon lendakari Nostradamus
+# JLN
