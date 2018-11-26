@@ -44,7 +44,8 @@ function readFiles() {
       if(filename != ""){
         let id = "file" + i;
         let functionDel = "return deleteFile(this);";
-        listaFile += "<li><a class = "+ id +">" + filename + "</a><a class="+ id +" href='#' onclick='" + functionDel + "'>X</a>" + "</li>";
+        let functionEd = "return editFile(this);";
+        listaFile += "<li><a class = "+ id +">" + filename + "</a>  <a class="+ id +" href='#' onclick='" + functionDel + "'><span class='icon-cancel'></span></a>" +"<a> | </a>"+ "<a class="+ id +" href='#' onclick='" + functionEd + "'><span class='icon-pencil'></span> </a>" +"</li>";
         i += 1;
 
       }
@@ -70,4 +71,26 @@ function deleteFile(filename){
     console.log('File deleted!');
     readFiles();
   });
+}
+
+function editFile(filename){
+  let fileNameTxt = document.getElementsByClassName(filename.className)[0].innerHTML;
+  let fileName = fileNameTxt.split(".")[0];
+  console.log(fileName);
+  let filePathAndName = "C:/apaso/" + fileNameTxt;
+  console.log(filePathAndName);
+  document.getElementById("tit").value = fileName;
+  var content = "";
+  fs.readFile(filePathAndName, function read(err, data) {
+    if (err) {
+        throw err;
+    }
+    content = data.toString();
+    document.getElementById("text").value = content;
+  });
+}
+
+function cleanFields() {
+  document.getElementById("tit").value = "";
+  document.getElementById("text").value = "";
 }

@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel = "stylesheet" type="text/css" href="fontello-640a1572/css/fontello.css">
     <script type="text/javascript" src="fileSystem.js"></script>
     <script type="text/javascript" src="renderer.js"></script>
 
@@ -13,7 +14,9 @@
     <input type="text" name="" placeholder="Titulo" id="tit">
     <p>Texto del archivo</p>
     <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
-    <button type="button" name="button" onclick="createFile();">CREAR ARCHIVOOOO!</button>
+    <br>
+    <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button>
+    <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button>
     <p id="error"></p>
     <br>
     <p>Archivos en la carpeta</p>
