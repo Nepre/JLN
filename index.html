@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link rel = "stylesheet" type="text/css" href="fontello-640a1572/css/fontello.css">
     <link rel = "stylesheet" type="text/css" href="estilo.css">
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+    <script type="text/javascript" src="fileSystem.js"></script>
     <script type="text/javascript" src="renderer.js"></script>
     <script type="text/javascript" src="dataBase.js"></script>
 
@@ -12,35 +14,28 @@
 
 
   <body>
-
-    <p>Título del archivo:</p>
-    <input type="text" name="" placeholder="Titulo" id="tit">
-
-
-    <p>Texto del archivo</p>
-    <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea><br>
-
-    <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button>
-    <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button>
-    <button type="button" name="button" onclick="readFiles();">Refrescar</button><br><br>
-
-
-    <p>Directorio:</p> <input type="text" id="path" placeholder="Directorio deseado... "><br><br>
-    <button type="button" name="button" onclick="saveDirectory();">Guardar directorio</button><br><br>
-
-    <p>Path en el que se desea crear la carpeta:   <input type="text" id="path2" placeholder="Directorio deseado... " value="C:/"></p>
-    <p>Nombre de la carpeta: <input type="text" id="folderName" placeholder="Nombre de la carpeta..." value="apaso"></p>
-    <button type="button" name="button" onclick="createF  older();">Crear carpeta</button>
-
-    <p id="error"></p>
-    <br>
-
-    <p>Archivos en la carpeta</p>
-    <ul id = "listaFile">
-    </ul>
-
-    <p id = "vacia"></p>
-
+    <div class="left">
+      <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
+      <p id="error"></p>
+      <br>
+      <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
+      <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
+      <button type="button" name="button" onclick="readFiles();">Refrescar</button>
+    </div>
+    <div class="main">
+      <h1>JLN</h1>
+      <p>Título del archivo:</p>
+      <input type="text" name="" placeholder="Titulo" id="tit">
+      <p>Texto del archivo</p>
+      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
+      <br>
+    </div>
+    <div class="right">
+      <p>Archivos en la carpeta</p>
+      <ul id = "listaFile">
+      </ul>
+      <p id = "vacia"></p>
+    </div>
   </body>
 
 
