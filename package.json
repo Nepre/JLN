@@ -14,6 +14,7 @@
     "electron-packager": "^12.2.0"
   },
   "dependencies": {
+    "cryptico": "^1.0.2",
     "mkdir": "0.0.2"
   }
 }
