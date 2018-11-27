@@ -12,5 +12,8 @@
   "devDependencies": {
     "electron": "^3.0.4",
     "electron-packager": "^12.2.0"
+  },
+  "dependencies": {
+    "mkdir": "0.0.2"
   }
 }

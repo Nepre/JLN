@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel = "stylesheet" type="text/css" href="fontello-640a1572/css/fontello.css">
+    <link rel = "stylesheet" type="text/css" href="estilo.css">
     <script type="text/javascript" src="fileSystem.js"></script>
     <script type="text/javascript" src="renderer.js"></script>
 
@@ -20,7 +21,11 @@
     <button type="button" name="button" onclick="readFiles();">Refrescar</button>
     <br>
     <br>
-    <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
+    <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... "><br>
+    <br>
+    <p>Path en el que se desea crear la carpeta:   <input type="text" id="path2" placeholder="Directorio deseado... " value="C:/"></p>
+    <p>Nombre de la carpeta: <input type="text" id="folderName" placeholder="Nombre de la carpeta..." value="apaso"></p>
+    <button type="button" name="button" onclick="createFolder();">Crear carpeta</button>
     <p id="error"></p>
     <br>
     <p>Archivos en la carpeta</p>
