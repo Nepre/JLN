@@ -20,14 +20,12 @@ function createFile(){
   if(document.getElementById("tit").value == "" || document.getElementById("text").value =="")
   {
 
-    document.getElementById("error").innerHTML = "Error, introduce todos los elementos necesarios.";
+    printMSG("Error, introduce todos los elementos necesarios.");
 
   }
 
   else
   {
-
-    document.getElementById("error").innerHTML = "";
 
     fs.writeFile(fileName, document.getElementById("text").value, (err) => {
 
@@ -159,7 +157,6 @@ function cleanFields()
 
   document.getElementById("tit").value = "";
   document.getElementById("text").value = "";
-  document.getElementById("error").value = "";
 
 }
 
@@ -171,8 +168,19 @@ function createFolder()
   var path = document.getElementById("path2").value + "/" + document.getElementById("folderName").value;
   mkdirp(path, function(err) {
     if(err){
-      document.getElementById("error").value = "No se ha podido crear el directorio en el Path deseado.";
+      printMSG("No se ha podido crear el directorio en el Path deseado.");
     }
   });
 
+}
+
+function printMSG(error){
+
+  iconClose = "<a href='#' onclick='closeError();'><span class='icon-cancel'></span></a>";
+  document.getElementById("error").innerHTML = error + iconClose;
+
+}
+
+function closeError() {
+  document.getElementById("error").innerHTML = "";
 }
