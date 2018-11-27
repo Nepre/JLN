@@ -29,12 +29,13 @@ function createFile(){
 
 }
 
+
 function readFiles() {
   let dirname = defaultPath;
   if(document.getElementById("path").value != "") dirname = document.getElementById("path").value;
   let listaFile = "";
   fs.readdir(dirname, function(err, filenames) {
-    console.log(filenames);
+    //console.log(filenames);
     if (err) {
       onError(err);
       return;
@@ -68,6 +69,7 @@ function readFiles() {
   });
 }
 
+
 function deleteFile(filename){
   let dirname = defaultPath;
   if(document.getElementById("path").value != "") dirname = document.getElementById("path").value;
@@ -78,6 +80,7 @@ function deleteFile(filename){
     readFiles();
   });
 }
+
 
 function editFile(filename){
   let dirname = defaultPath;
@@ -98,7 +101,16 @@ function editFile(filename){
   });
 }
 
+
 function cleanFields() {
   document.getElementById("tit").value = "";
   document.getElementById("text").value = "";
+}
+
+
+function createFolder(){
+  var mkdirp = require('mkdirp');
+  var path = document.getElementById("path2").value + "/" + document.getElementById("folderName").value;
+  mkdirp(path, function(err) {
+  });
 }
