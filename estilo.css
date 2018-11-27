@@ -9,10 +9,30 @@ body{
   margin: 0 auto;
 }
 
+header{
+  display: inline-flex;
+  background-color: #4f5261;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-right: 2%;
+  padding-left: 2%;
+  border-bottom: solid 0.8em #16161a;
+}
+
+header p{
+    background-color: #4f5261;
+}
+
+header p + p{
+  text-align: right;
+}
+
 .left{
   background-color: #363842;
   position: absolute;
-  top: 0;
+  top: 6.8%;
   bottom: 0;
   left: 0;
   padding-right: 2%;
@@ -20,8 +40,9 @@ body{
 }
 
 .main{
+  width: 38.7%;
   position: absolute;
-  top: 0;
+  top: 8.5%;
   bottom: 0;
   left: 23%;
 }
@@ -31,7 +52,7 @@ body{
   background-color: #363842;
   margin-left: 0;
   position: absolute;
-  top: 0;
+  top: 6.8%;
   bottom: 0;
   left: 64%;
   right: 0;
@@ -39,14 +60,22 @@ body{
   padding-left: 2%;
 }
 
-body div input, body div textarea{
+body div h1 + input, body div textarea{
   color: #e4e7f3;
   background-color: #36383f;
 }
 
+input{
+  width: 100%;
+  height: 1.5em;
+  border: 0.05em solid #d2d2d2;
+  margin-bottom: 1em;
+}
+
 body div textarea{
   position: absolute;
-  top: 25%;
+  left: 0;
+  top: 16%;
   bottom: 0;
 }
 
@@ -54,11 +83,23 @@ body div textarea{
   color: #e4e7f3;
 }
 
+body div p{
+  background-color: #363842;
+}
+
 body div button{
   width: 100%;
-  background-color: #4CAF50; /* Green */
-  border: none;
+  padding: 1.5em;
+  background-color: #3b5044;
+  border:solid #4caf50 0.2em;
   color: white;
   text-align: center;
   text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+body div button:hover, body div button:active {
+  background-color: #4caf50;
 }
