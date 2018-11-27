@@ -13,7 +13,7 @@ function createFile(){
     path = document.getElementById("path").value;
 
   let content = "Some text to save into the file";
-  let fileName = path  + document.getElementById("tit").value + ".txt";
+  let fileName = path + "/" + document.getElementById("tit").value + ".txt";
 
   console.log(fileName);
 
@@ -28,7 +28,9 @@ function createFile(){
   {
 
     fs.writeFile(fileName, document.getElementById("text").value, (err) => {
-
+      if(err){
+        printMSG("Error al escribir el archivo.");
+      }
       readFiles();
 
     });
@@ -111,7 +113,7 @@ function deleteFile(filename)
   if(document.getElementById("path").value != "")
     dirname = document.getElementById("path").value;
 
-  let filePathAndName = dirname + document.getElementsByClassName(filename.className)[0].innerHTML;
+  let filePathAndName = dirname + "/" + document.getElementsByClassName(filename.className)[0].innerHTML;
 
   fs.unlink(filePathAndName, function (err)
   {
@@ -132,7 +134,8 @@ function editFile(filename)
 
   let fileNameTxt = document.getElementsByClassName(filename.className)[0].innerHTML;
   let fileName = fileNameTxt.split(".")[0];
-  let filePathAndName = dirname + fileNameTxt;
+  let filePathAndName = dirname + "/" + fileNameTxt;
+    console.log(filePathAndName);
 
   document.getElementById("tit").value = fileName;
 
@@ -142,7 +145,7 @@ function editFile(filename)
   {
     if (err)
     {
-        throw err;
+        console.log("error");
     }
 
     content = data.toString();

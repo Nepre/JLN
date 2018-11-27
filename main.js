@@ -5,7 +5,14 @@ const {app, BrowserWindow} = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({show:false})
+  mainWindow.maximize();
+  mainWindow.show();
+  mainWindow.setResizable(false);
+  mainWindow.setMaximizable(true);
+
+
+
 
   mainWindow.loadFile('index.html')
   mainWindow.on('closed', function () {
