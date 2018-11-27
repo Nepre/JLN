@@ -1,0 +1,26 @@
+*{
+  background-color: #282f4d;
+  color: #FFF;
+  font-family: 'Bitter', sans-serif;
+}
+
+body{
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+.primero{
+  background-color: #564aa8;
+  margin-left: 0;
+  padding-bottom: 52.6%;
+  padding-right: 2%;
+  padding-left: 2%;
+  width: 100%;
+}
+
+body div input, body div textarea{
+  background-color: #eff7f3;
+}
+
+body div button{
+}

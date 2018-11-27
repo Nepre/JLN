@@ -4,30 +4,34 @@
     <meta charset="utf-8">
     <link rel = "stylesheet" type="text/css" href="fontello-640a1572/css/fontello.css">
     <link rel = "stylesheet" type="text/css" href="estilo.css">
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <script type="text/javascript" src="fileSystem.js"></script>
     <script type="text/javascript" src="renderer.js"></script>
 
     <title></title>
   </head>
   <body>
-
-    <p>Título del archivo:</p>
-    <input type="text" name="" placeholder="Titulo" id="tit">
-    <p>Texto del archivo</p>
-    <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
-    <br>
-    <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button>
-    <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button>
-    <button type="button" name="button" onclick="readFiles();">Refrescar</button>
-    <br>
-    <br>
-    <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
-    <p id="error"></p>
-    <br>
-    <p>Archivos en la carpeta</p>
-    <ul id = "listaFile">
-    </ul>
-    <p id = "vacia"></p>
+    <div class="primero">
+      <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
+      <p id="error"></p>
+      <br>
+      <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
+      <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
+      <button type="button" name="button" onclick="readFiles();">Refrescar</button>
+    </div>
+    <div>
+      <p>Título del archivo:</p>
+      <input type="text" name="" placeholder="Titulo" id="tit">
+      <p>Texto del archivo</p>
+      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
+      <br>
+    </div>
+    <div>
+      <p>Archivos en la carpeta</p>
+      <ul id = "listaFile">
+      </ul>
+      <p id = "vacia"></p>
+    </div>
   </body>
   <script>
       // You can also require other files to run in this process
