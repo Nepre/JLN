@@ -11,7 +11,7 @@
     <title></title>
   </head>
   <body>
-    <div class="primero">
+    <div class="left">
       <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
       <p id="error"></p>
       <br>
@@ -19,14 +19,15 @@
       <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
       <button type="button" name="button" onclick="readFiles();">Refrescar</button>
     </div>
-    <div>
+    <div class="main">
+      <h1>JLN</h1>
       <p>Título del archivo:</p>
       <input type="text" name="" placeholder="Titulo" id="tit">
       <p>Texto del archivo</p>
       <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
       <br>
     </div>
-    <div>
+    <div class="right">
       <p>Archivos en la carpeta</p>
       <ul id = "listaFile">
       </ul>
