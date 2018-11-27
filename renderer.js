@@ -4,6 +4,7 @@
 
 var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 var defaultPath = "C:/apaso/";
+var mkdirp = require('mkdirp');
 
 function createFile(){
 
@@ -166,8 +167,6 @@ function cleanFields()
 
 function createFolder()
 {
-
-  var mkdirp = require('mkdirp');
   var path = document.getElementById("path2").value + "/" + document.getElementById("folderName").value;
   mkdirp(path, function(err) {
     if(err){
@@ -185,5 +184,7 @@ function printMSG(error){
 }
 
 function closeError() {
+
   document.getElementById("error").innerHTML = "";
+
 }

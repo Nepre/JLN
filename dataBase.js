@@ -56,7 +56,6 @@ function saveDirectory(){
     }
 
 
-    console.log(optionsJSON);
 
   });
 
