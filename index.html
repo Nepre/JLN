@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link rel = "stylesheet" type="text/css" href="fontello-640a1572/css/fontello.css">
+    <link href="https://fonts.googleapis.com/css?family=Bitter|Roboto" rel="stylesheet">
     <link rel = "stylesheet" type="text/css" href="estilo.css">
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <script type="text/javascript" src="fileSystem.js"></script>
@@ -15,9 +15,12 @@
 
 
   <body>
-    <div class="left">
-      <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" placeholder="Directorio deseado... ">
+    <header>
       <p id="error"></p>
+      <p>JLN&copy;</p>
+    </header>
+    <div class="left">
+      <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" class="input" placeholder="Directorio deseado... ">
       <br>
       <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
       <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
@@ -25,9 +28,7 @@
     </div>
     <div class="main">
       <h1>JLN</h1>
-      <p>Título del archivo:</p>
-      <input type="text" name="" placeholder="Titulo" id="tit">
-      <p>Texto del archivo</p>
+      <input type="text" name="" placeholder="Titulo" id="tit" class="input" class="titulo">
       <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
       <br>
     </div>
