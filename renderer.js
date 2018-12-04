@@ -6,7 +6,8 @@ var fs = require('fs'); // Load the File System to execute our common tasks (CRU
 var defaultPath = "C:/apaso/";
 var mkdirp = require('mkdirp');
 
-function createFile(){
+function createFile()
+{
 
   path = defaultPath;
 
@@ -44,7 +45,8 @@ function createFile(){
 }
 
 
-function readFiles() {
+function readFiles()
+{
 
   let dirname = defaultPath;
 
@@ -139,6 +141,7 @@ function editFile(filename)
     console.log(filePathAndName);
 
   document.getElementById("tit").value = fileName;
+  document.getElementById("tit").contentEditable = "false";
 
   var content = "";
 
@@ -151,6 +154,7 @@ function editFile(filename)
 
     content = data.toString();
     document.getElementById("text").value = content;
+
 
   });
 }
@@ -187,4 +191,9 @@ function closeError() {
 
   document.getElementById("error").innerHTML = "";
 
+}
+
+function closeFile(){
+
+    document.getElementById("tit").contentEditable = "true";
 }
