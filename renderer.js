@@ -189,7 +189,7 @@ function printMSG(error){
 
 function closeError() {
 
-  document.getElementById("error").innerHTML = "";
+  document.getElementById("error").innerHTML = "JLN&copy;";
 
 }
 
