@@ -2,6 +2,8 @@
 
 var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
 var cryptico = require('cryptico');
+var aesjs = require('aes-js');
+var pbkdf2 = require('pbkdf2');
 var defaultPath = "C:/apaso/";
 var path = "C:/apaso/cifrados/";
 
@@ -38,9 +40,16 @@ function cifrater(){
 
     var message = file.toString();
     //Ciframos
-    var EncryptionResult = cryptico.encrypt(message, PublicKeyString);
-    console.log(EncryptionResult);
-    var message2 = EncryptionResult.cipher.toString();
+  //  var EncryptionResult = cryptico.encrypt(message, PublicKeyString);
+    var key = pbkdf2.pbkdf2Sync('martin', 'salt', 1, 256 / 8, 'sha512');
+    console.log(key);
+    var textBytes = aesjs.utils.utf8.toBytes(message);
+    var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+    var encryptedBytes = aesCtr.encrypt(textBytes);
+    var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+    console.log(encryptedHex);
+/* //    console.log(EncryptionResult);
+  //  var message2 = EncryptionResult.cipher.toString();
 
     let fileName = path + fileNameTxt;
     console.log(fileName);
@@ -62,6 +71,7 @@ function cifrater(){
       }
       console.log("Todo ok");
     });
+    */
 
   });
 }
