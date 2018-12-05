@@ -42,12 +42,14 @@ function createFile()
   document.getElementById("tit").value = "";
   document.getElementById("text").value = "";
 
+  closeFile();
+
 }
 
 
 function readFiles()
 {
-
+  saveDirectory();
   let dirname = defaultPath;
 
   if(document.getElementById("path").value != "")
@@ -141,7 +143,7 @@ function editFile(filename)
     console.log(filePathAndName);
 
   document.getElementById("tit").value = fileName;
-  document.getElementById("tit").contentEditable = "false";
+  document.getElementById("tit").disabled = true;
 
   var content = "";
 
@@ -180,20 +182,22 @@ function createFolder()
 
 }
 
-function printMSG(error){
+function printMSG(error)
+{
 
   iconClose = "<a href='#' onclick='closeError();'><span class='icon-cancel'></span></a>";
   document.getElementById("error").innerHTML = error + iconClose;
 
 }
 
-function closeError() {
+function closeError()
+{
 
   document.getElementById("error").innerHTML = "JLN&copy;";
 
 }
 
 function closeFile(){
-
-    document.getElementById("tit").contentEditable = "true";
+    document.getElementById("tit").disabled = false;
+    cleanFields();
 }

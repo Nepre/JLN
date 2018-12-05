@@ -18,6 +18,9 @@ function startDataBase() {
 
     if(optionsJSON.hasOwnProperty('path'))
       document.getElementById("path").value = optionsJSON.path;
+
+      if(optionsJSON.hasOwnProperty('pathCifrado'))
+        document.getElementById("pathCifrado").value = optionsJSON.pathCifrado;
   });
 
 }
@@ -39,6 +42,13 @@ function saveDirectory(){
       if(optionsJSON.hasOwnProperty('path')){
 
         optionsJSON.path = document.getElementById("path").value;
+
+        fs.writeFile('./options.json', JSON.stringify(optionsJSON, null, 4), (err) => {
+          if(err){
+            printMSG("Error al modificar las opciones.");
+          }
+
+        });
 
       }
       else{

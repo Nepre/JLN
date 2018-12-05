@@ -21,7 +21,9 @@
       <p id="error">JLN&copy;</p>
     </header>
     <div class="left">
-      <p>Directorio (Por defecto C:/apaso):</p> <input type="text" id="path" class="input" placeholder="Directorio deseado... ">
+      <p>Path (Por defecto C:/apaso):</p> <input type="text" id="path" class="input" placeholder="Directorio deseado... ">
+      <br>
+      <p>Drive (Por defecto ../cifrados):</p> <input type="text" id="pathCifrado" class="input" placeholder="Directorio deseado... ">
       <br>
       <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
       <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
@@ -33,7 +35,7 @@
     <div class="main">
       <h1>JLN</h1>
       <input type="text" name="" placeholder="Titulo" id="tit" class="input" class="titulo">
-      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..."></textarea>
+      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..." onchange="createFile();"></textarea>
       <br>
     </div>
     <div class="right">
@@ -47,7 +49,6 @@
 
   <script>
       // You can also require other files to run in this process
-      readFiles();
       start();
       require('./renderer.js');
       require('./dataBase.js');
