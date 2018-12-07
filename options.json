@@ -1,5 +1,7 @@
 {
     "path": "C:/apaso",
     "pathDrive": "C:/drive",
-    "pathCifrado": "C:/apaso/cifrados"
+    "pathCifrado": "C:/apaso/cifrados",
+    "RSAPub": "",
+    "RSAPriv": ""
 }
