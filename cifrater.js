@@ -28,16 +28,25 @@ function cifrater(){
     // document.getElementById("error").innerHTML = file;
 
     // Creamos la key de RSA
-    var gen = Math.random().toString();
-    var PassPhrase = gen;
-    var Bits = 1024;
 
-    var RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
-    console.log(RSAkey);
+    var rsa;
+    var public;
+    if(getRSA()[0] == "" || getRSA()[1] == ""){
+      var gen = Math.random().toString();
+      var PassPhrase = gen;
+      var Bits = 1024;
+      rsa = cryptico.generateRSAKey(PassPhrase, Bits);
+      console.log(rsa);
+      // Creamos la key publica
+      public = cryptico.publicKeyString(rsa);
+      console.log(public);
+      setRSA(rsa, public);
+    }else{
+      rsa = getRSA()[0];
+      public = getRSA()[1];
+    }
 
-    // Creamos la key publica
-    var PublicKeyString = cryptico.publicKeyString(RSAkey);
-    console.log(PublicKeyString);
+    console.log(rsa);
 
     var message = file.toString();
     //Ciframos
@@ -60,9 +69,11 @@ function cifrater(){
       console.log("Todo ok");
     });
 
-    var res = cryptico.encrypt(key.toString() , PublicKeyString);
+    var res = cryptico.encrypt(key.toString() , public);
+    console.log(res);
     var txt = res.cipher.toString();
-    let fileName3 = path + "prueba.txt";
+    var str = fileNameTxt.split(".")[0] + "-key.txt";
+    let fileName3 = path + str ;
     console.log(fileName3);
     fs.writeFile(fileName3, txt, (err) => {
       if(err){
@@ -70,14 +81,6 @@ function cifrater(){
       }
       console.log("Todo ok");
     });
-    fileName3 = path + "prueba1.txt";
-    fs.writeFile(fileName3, RSAkey, (err) => {
-      if(err){
-        printMSG("Error al escribir el archivo.");
-      }
-      console.log("Todo ok");
-    });
-    console.log(txt);
   });
 }
 
@@ -100,48 +103,36 @@ function decifrater(){
     }
     let file = data;
     var encryptedHex = file.toString();
+    console.log(encryptedHex);
     //Desciframos
-    filaNameTxt = "prueba.txt";
-    filePathAndName = dirname + "/cifrados/" + fileNameTxt;
-    fs.readFile(filePathAndName, function read(err, data)
+    var str = fileNameTxt.split(".")[0] + "-key.txt";
+    var filePathAndName2 = dirname + "/cifrados/" + str;
+    fs.readFile(filePathAndName2, function read(err, data)
     {
       if (err)
       {
           console.log("error");
       }
       let file1 = data;
-      filaNameTxt = "prueba1.txt";
-      filePathAndName = dirname + "/cifrados/" + fileNameTxt;
-      fs.readFile(filePathAndName, function read(err, data)
-      {
-        if (err)
-        {
-            console.log("error");
+      console.log(file1.toString());
+      rsa = getRSA()[0];
+      console.log(rsa);
+      var DecryptionResult = cryptico.decrypt(file1.toString(), rsa);
+      console.log(DecryptionResult);
+      var key;
+      var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
+      var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+      var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+      var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+      console.log(decryptedText);
+      var message3= decryptedText.toString();
+      let fileName2 = path + "Holades.txt";
+      console.log(fileName2);
+      fs.writeFile(fileName2, message3, (err) => {
+        if(err){
+          printMSG("Error al escribir el archivo.");
         }
-        let file2 = data;
-        console.log(file1);
-        console.log(file2);
-        let uno = file1.toString();
-        let dos = file2.toString();
-        console.log(uno);
-        console.log(dos);
-      //  var DecryptionResult = cryptico.decrypt(uno,dos);
-      //  console.log(DecryptionResult);
-        var key;
-        var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
-        var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-        var decryptedBytes = aesCtr.decrypt(encryptedBytes);
-        var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-        console.log(decryptedText);
-        var message3= decryptedText.toString();
-        let fileName2 = path + "Holades.txt";
-        console.log(fileName2);
-        fs.writeFile(fileName2, message3, (err) => {
-          if(err){
-            printMSG("Error al escribir el archivo.");
-          }
-          console.log("Todo ok");
-        });
+        console.log("Todo ok");
       });
     });
   });
