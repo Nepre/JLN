@@ -73,6 +73,7 @@ function saveDirectory(){
 }
 
 
+
 function setRSA(RSAPub, RSAPriv) {
   var optionsJSON;
   fs.readFile('./options.json', (err, data) => {
@@ -84,7 +85,6 @@ function setRSA(RSAPub, RSAPriv) {
     }
     optionsJSON = JSON.parse(data);
 
-
     if(optionsJSON.hasOwnProperty('RSAPub') && optionsJSON.hasOwnProperty('RSAPriv')){
       optionsJSON.RSAPub = RSAPub;
       optionsJSON.RSAPriv = RSAPriv;
@@ -95,25 +95,21 @@ function setRSA(RSAPub, RSAPriv) {
         }
 
       });
+    }
   });
 }
 
 function getRSA() {
   var optionsJSON;
-  fs.readFile('./options.json', (err, data) => {
-    optionsJSON = JSON.parse(data);
-    if (err)
-    {
-      printMSG("No se han podido abrir las opciones para obtener la RSA.");
-      return;
-    }
-    optionsJSON = JSON.parse(data);
-    if(optionsJSON.hasOwnProperty('RSAPub') && optionsJSON.hasOwnProperty('RSAPriv')){
-      var RSArray = [optionsJSON.RSAPub, optionsJSON.RSAPriv];
-    }
-    else {
-      printMSG("Hay un problema en el sistema de opciones, vuelva a restaurarlo a base.");
-    }
-    return RSArray;
-  });
+  var data = fs.readFileSync('./options.json');
+  optionsJSON = JSON.parse(data);
+  if(optionsJSON.hasOwnProperty('RSAPub') && optionsJSON.hasOwnProperty('RSAPriv')){
+    var RSArray = [optionsJSON.RSAPub, optionsJSON.RSAPriv];
+  }
+  else {
+    printMSG("Hay un problema en el sistema de opciones, vuelva a restaurarlo a base.");
+    var RSArray = [-1, -1];
+  }
+
+  return RSArray;
 }
