@@ -1,3 +1,5 @@
 {
-  "path":"C:/apaso"
+    "path": "C:/apaso",
+    "pathDrive": "C:/drive",
+    "pathCifrado": "C:/apaso/cifrados"
 }
