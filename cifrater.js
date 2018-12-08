@@ -6,6 +6,16 @@ var aesjs = require('aes-js');
 var pbkdf2 = require('pbkdf2');
 var defaultPath = "C:/apaso/";
 var path = "C:/apaso/cifrados/";
+var rsa;
+var public;
+  var arra = new Uint8Array(10);
+  var PassPhrase = crypto.getRandomValues(arra);
+  var Bits = 1024;
+  rsa = cryptico.generateRSAKey(PassPhrase, Bits);
+  console.log(rsa);
+  // Creamos la key publica
+  public = cryptico.publicKeyString(rsa);
+  console.log(public);
 
 function cifrater(){
 
@@ -28,29 +38,9 @@ function cifrater(){
     // document.getElementById("error").innerHTML = file;
 
     // Creamos la key de RSA
-
-    var rsa;
-    var public;
-    if(getRSA()[0] == "" || getRSA()[1] == ""){
-      var arra = new Uint16Array(10);
-      var PassPhrase = crypto.getRandomValues(arra);
-      var Bits = 1024;
-      rsa = cryptico.generateRSAKey(PassPhrase, Bits);
-      console.log(rsa);
-      // Creamos la key publica
-      public = cryptico.publicKeyString(rsa);
-      console.log(public);
-      setRSA(rsa, public);
-    }else{
-      rsa = getRSA()[0];
-      public = getRSA()[1];
-    }
-
-    console.log(rsa);
-
     var message = file.toString();
     //Ciframos
-    var array = new Uint16Array(10);
+    var array = new Uint8Array(10);
     var mes = crypto.getRandomValues(array).toString();
     var key = pbkdf2.pbkdf2Sync( mes , 'salt', 1, 256 / 8, 'sha512');
     console.log(key);
@@ -69,12 +59,16 @@ function cifrater(){
       }
       console.log("Todo ok");
     });
-    var txt = key.toString();
+    var key2 = Decodeuint8arr(key);
+    console.log(key2);
+    var res = cryptico.encrypt(key2, public);
+    console.log(res);
+    var txt = res.cipher.toString();
     console.log(txt);
     var str = fileNameTxt.split(".")[0] + "-key.txt";
     let fileName3 = path + str ;
     console.log(fileName3);
-    fs.writeFile(fileName3, key, (err) => {
+    fs.writeFile(fileName3, txt, (err) => {
       if(err){
         printMSG("Error al escribir el archivo.");
       }
@@ -113,7 +107,10 @@ function decifrater(){
           console.log("error");
       }
       let file1 = data;
-      var key= data;
+      console.log(file1.toString());
+      var DecryptionResult = cryptico.decrypt(file1.toString(), rsa);
+      console.log(DecryptionResult);
+      var key = Encodeuint8arr(DecryptionResult.plaintext);
       var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
       var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
       var decryptedBytes = aesCtr.decrypt(encryptedBytes);
@@ -130,4 +127,12 @@ function decifrater(){
       });
     });
   });
+}
+
+function Decodeuint8arr(uint8array){
+    return new TextDecoder("utf-8").decode(uint8array);
+}
+
+function Encodeuint8arr(myString){
+    return new TextEncoder("utf-8").encode(myString);
 }
