@@ -32,8 +32,8 @@ function cifrater(){
     var rsa;
     var public;
     if(getRSA()[0] == "" || getRSA()[1] == ""){
-      var gen = Math.random().toString();
-      var PassPhrase = gen;
+      var arra = new Uint16Array(10);
+      var PassPhrase = crypto.getRandomValues(arra);
       var Bits = 1024;
       rsa = cryptico.generateRSAKey(PassPhrase, Bits);
       console.log(rsa);
@@ -50,7 +50,8 @@ function cifrater(){
 
     var message = file.toString();
     //Ciframos
-    var mes = Math.random().toString();
+    var array = new Uint16Array(10);
+    var mes = crypto.getRandomValues(array).toString();
     var key = pbkdf2.pbkdf2Sync( mes , 'salt', 1, 256 / 8, 'sha512');
     console.log(key);
     var textBytes = aesjs.utils.utf8.toBytes(message);
@@ -68,14 +69,12 @@ function cifrater(){
       }
       console.log("Todo ok");
     });
-
-    var res = cryptico.encrypt(key.toString() , public);
-    console.log(res);
-    var txt = res.cipher.toString();
+    var txt = key.toString();
+    console.log(txt);
     var str = fileNameTxt.split(".")[0] + "-key.txt";
     let fileName3 = path + str ;
     console.log(fileName3);
-    fs.writeFile(fileName3, txt, (err) => {
+    fs.writeFile(fileName3, key, (err) => {
       if(err){
         printMSG("Error al escribir el archivo.");
       }
@@ -114,12 +113,7 @@ function decifrater(){
           console.log("error");
       }
       let file1 = data;
-      console.log(file1.toString());
-      rsa = getRSA()[0];
-      console.log(rsa);
-      var DecryptionResult = cryptico.decrypt(file1.toString(), rsa);
-      console.log(DecryptionResult);
-      var key;
+      var key= data;
       var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
       var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
       var decryptedBytes = aesCtr.decrypt(encryptedBytes);
