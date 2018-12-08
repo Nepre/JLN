@@ -6,16 +6,12 @@ var aesjs = require('aes-js');
 var pbkdf2 = require('pbkdf2');
 var defaultPath = "C:/apaso/";
 var path = "C:/apaso/cifrados/";
-var rsa;
-var public;
   var arra = new Uint8Array(10);
   var PassPhrase = crypto.getRandomValues(arra);
   var Bits = 1024;
-  rsa = cryptico.generateRSAKey(PassPhrase, Bits);
-  console.log(rsa);
-  // Creamos la key publica
-  public = cryptico.publicKeyString(rsa);
-  console.log(public);
+
+  var RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
+  var PublicKeyString = cryptico.publicKeyString(RSAkey);
 
 function cifrater(){
 
@@ -61,7 +57,7 @@ function cifrater(){
     });
     var key2 = Decodeuint8arr(key);
     console.log(key2);
-    var res = cryptico.encrypt(key2, public);
+    var res = cryptico.encrypt(key2, PublicKeyString);
     console.log(res);
     var txt = res.cipher.toString();
     console.log(txt);
@@ -108,9 +104,10 @@ function decifrater(){
       }
       let file1 = data;
       console.log(file1.toString());
-      var DecryptionResult = cryptico.decrypt(file1.toString(), rsa);
+      var DecryptionResult = cryptico.decrypt(file1.toString(), RSAkey);
       console.log(DecryptionResult);
       var key = Encodeuint8arr(DecryptionResult.plaintext);
+      console.log(key);
       var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
       var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
       var decryptedBytes = aesCtr.decrypt(encryptedBytes);
