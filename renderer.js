@@ -41,7 +41,7 @@ function createFile()
 
   document.getElementById("tit").value = "";
   document.getElementById("text").value = "";
-
+  pleaseEncryptMe(fileName);
   closeFile();
 
 }
@@ -127,6 +127,27 @@ function deleteFile(filename)
     readFiles();
 
   });
+
+  fileNoExt = document.getElementsByClassName(filename.className)[0].innerHTML.split(".")[0];
+
+  let filePathAndName2 = dirname + "/cifrados/" + document.getElementsByClassName(filename.className)[0].innerHTML;
+  fs.unlink(filePathAndName2, function (err)
+  {
+
+    console.log('File deleted!');
+    readFiles();
+
+  });
+
+
+  let filePathAndName3 = dirname + "/cifrados/" + fileNoExt + "-key.txt";
+  fs.unlink(filePathAndName3, function (err)
+  {
+
+    console.log('File deleted!');
+    readFiles();
+
+  });
 }
 
 
@@ -198,7 +219,7 @@ function closeError()
 }
 
 function closeFile(){
-    document.getElementById("tit").disabled = false;
+    if(document.getElementById("tit") != undefined) document.getElementById("tit").disabled = false;
     cleanFields();
 }
 
@@ -269,7 +290,8 @@ function pull(){
 
           }
 
-          printMSG("Se ha hecho pull correctamente.")
+          printMSG("Se ha hecho pull correctamente.");
+          decryptAll(pathCifrado);
         });
 
     });
@@ -278,6 +300,8 @@ function pull(){
 }
 
 function push(){
+
+  encryptAll(document.getElementById("path").innerHTML);
 
   //Variable de string del principio y contador del while
   let file = "file";

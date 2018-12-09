@@ -22,7 +22,7 @@ function encryptAll(path) {
     if (err) {
 
       printMSG("Ha habido un error leyendo los directorios para encriptar.");
-
+      return;
     }
 
     filenames.sort();
@@ -42,6 +42,7 @@ function encryptAll(path) {
 function decryptAll(pathCifrado) {
 
   var dirname = pathCifrado;
+  console.log("Se ha llamado a " + dirname);
 
   fs.readdir(dirname, function(err, filenames)
   {
@@ -50,7 +51,6 @@ function decryptAll(pathCifrado) {
 
       mkdirp(dirname, function(err) {
       });
-      decryptAll();
 
     }
 

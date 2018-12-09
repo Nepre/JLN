@@ -100,7 +100,8 @@ function decifrater(filename){
       var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
       console.log(decryptedText);
       var message3= decryptedText.toString();
-      let fileName2 = path + "Holades.txt";
+      let fileName2 = defaultPath + filename;
+      console.log("El path es " + path);
       console.log(fileName2);
       fs.writeFile(fileName2, message3, (err) => {
         if(err){
@@ -122,11 +123,12 @@ function Encodeuint8arr(myString){
 
 function pleaseEncryptMe(thisThing){
   let fileNameTxt;
-
+  console.log(thisThing);
   if(thisThing != undefined){
-    fileNameTxt = document.getElementsByClassName(thisThing.className)[0].innerHTML;ç
+    fileNameTxt = document.getElementsByClassName(thisThing.className)[0].innerHTML;
     encrypt(fileNameTxt);
   }
+  console.log("Encriptando");
 
 
 

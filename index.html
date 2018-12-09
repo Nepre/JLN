@@ -27,14 +27,14 @@
       <br>
       <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
       <button type="button" name="button" onclick="closeFile();">Cerrar archivo</button><br><br>
-      <button type="button" name="button" onclick="readFiles();">Refrescar</button><br><br>
-      <button type="button" name="button" onclick="pull();">Pull</button><br><br>
-      <button type="button" name="button" onclick="push();">Push</button>
+      <button type="button" name="button" onclick="readFiles(); startDataBase();">Refrescar</button><br><br>
+      <button class="pullypush" type="button" name="button" onclick="pull();">Pull</button><br><br>
+      <button class="pullypush" type="button" name="button" onclick="push();">Push</button>
     </div>
     <div class="main">
       <h1>JLN</h1>
       <input type="text" name="" placeholder="Titulo" id="tit" class="input" class="titulo">
-      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..." onchange="createFile(); pleaseEncryptMe(this);"></textarea>
+      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..." onchange="createFile();"></textarea>
       <br>
     </div>
     <div class="right">
