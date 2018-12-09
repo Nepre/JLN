@@ -31,10 +31,11 @@ function cifrater(filename){
     // Creamos la key de RSA
     var message = file.toString();
     //Ciframos
-    var array = new Uint16Array(10);
+    var array = new Uint8Array(10);
     var mes = crypto.getRandomValues(array).toString();
     var key = pbkdf2.pbkdf2Sync( mes , 'salt', 1, 256 / 8, 'sha512');
     console.log(key);
+
     var textBytes = aesjs.utils.utf8.toBytes(message);
     var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
     var encryptedBytes = aesCtr.encrypt(textBytes);
@@ -100,8 +101,7 @@ function decifrater(filename){
       var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
       console.log(decryptedText);
       var message3= decryptedText.toString();
-      let fileName2 = defaultPath + filename;
-      console.log("El path es " + path);
+      let fileName2 = defaultPath + "/" + filename;
       console.log(fileName2);
       fs.writeFile(fileName2, message3, (err) => {
         if(err){
@@ -123,12 +123,10 @@ function Encodeuint8arr(myString){
 
 function pleaseEncryptMe(thisThing){
   let fileNameTxt;
-  console.log(thisThing);
+
   if(thisThing != undefined){
     fileNameTxt = document.getElementsByClassName(thisThing.className)[0].innerHTML;
-    encrypt(fileNameTxt);
   }
-  console.log("Encriptando");
 
 
 
