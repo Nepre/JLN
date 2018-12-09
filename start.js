@@ -15,6 +15,7 @@ function decryptAndEncryptAll(path, pathCifrado){
 function encryptAll(path) {
 
   var dirname = path;
+  console.log(dirname);
 
   fs.readdir(dirname, function(err, filenames)
   {
@@ -35,7 +36,6 @@ function encryptAll(path) {
 
     });
   });
-
 
 }
 

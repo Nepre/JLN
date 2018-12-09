@@ -43,7 +43,7 @@ function cifrater(filename){
     console.log(encryptedHex);
     var message2 = encryptedHex.toString();
 
-    let fileName = path + fileNameTxt;
+    let fileName = dirname + "/cifrados/" + fileNameTxt;
     console.log(fileName);
     fs.writeFile(fileName, message2, (err) => {
       if(err){
@@ -52,7 +52,7 @@ function cifrater(filename){
       console.log("Todo ok");
     });
     var str = fileNameTxt.split(".")[0] + "-key.txt";
-    let fileName3 = path + str ;
+    let fileName3 = dirname + "/cifrados/" + str ;
     console.log(fileName3);
     fs.writeFile(fileName3, key, (err) => {
       if(err){

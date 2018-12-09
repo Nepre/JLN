@@ -32,7 +32,7 @@ function startDataBase() {
       error = true;
     }
 
-    //decryptAndEncryptAll(optionsJSON.path, optionsJSON.pathCifrado);
+    decryptAndEncryptAll(optionsJSON.path, optionsJSON.pathCifrado);
   });
 
 }
