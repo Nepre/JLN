@@ -31,8 +31,6 @@ function startDataBase() {
       printMSG("Error encontrando el pathCifrado en opciones.");
       error = true;
     }
-
-    decryptAndEncryptAll(optionsJSON.path, optionsJSON.pathCifrado);
   });
 
 }

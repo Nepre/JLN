@@ -42,7 +42,7 @@ function createFile()
   document.getElementById("tit").value = "";
   document.getElementById("text").value = "";
   pleaseEncryptMe(fileName);
-  closeFile();
+  //closeFile();
 
 }
 
