@@ -66,6 +66,7 @@ function cifrater(filename){
 function decifrater(filename){
 
   let dirname = path;
+  console.log(filename);
 
   if(document.getElementById("path").value != "")
     dirname = document.getElementById("path").value;
