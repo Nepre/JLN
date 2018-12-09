@@ -6,12 +6,6 @@ var aesjs = require('aes-js');
 var pbkdf2 = require('pbkdf2');
 var defaultPath = "C:/apaso/";
 var path = "C:/apaso/cifrados/";
-var arra = new Uint8Array(10);
-var PassPhrase = crypto.getRandomValues(arra);
-var Bits = 1024;
-
-var RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
-var PublicKeyString = cryptico.publicKeyString(RSAkey);
 
 function cifrater(filename){
 
@@ -37,7 +31,7 @@ function cifrater(filename){
     // Creamos la key de RSA
     var message = file.toString();
     //Ciframos
-    var array = new Uint8Array(10);
+    var array = new Uint16Array(10);
     var mes = crypto.getRandomValues(array).toString();
     var key = pbkdf2.pbkdf2Sync( mes , 'salt', 1, 256 / 8, 'sha512');
     console.log(key);
@@ -56,16 +50,10 @@ function cifrater(filename){
       }
       console.log("Todo ok");
     });
-    var key2 = Decodeuint8arr(key);
-    console.log(key2);
-    var res = cryptico.encrypt(key2, PublicKeyString);
-    console.log(res);
-    var txt = res.cipher.toString();
-    console.log(txt);
     var str = fileNameTxt.split(".")[0] + "-key.txt";
     let fileName3 = path + str ;
     console.log(fileName3);
-    fs.writeFile(fileName3, txt, (err) => {
+    fs.writeFile(fileName3, key, (err) => {
       if(err){
         printMSG("Error al escribir el archivo.");
       }
@@ -106,12 +94,6 @@ function decifrater(filename){
       }
       var key = data;
       console.log(key);
-      var ab = new ArrayBuffer(key.length);
-      var view = new Uint8Array(ab);
-      for (var i = 0; i < key.length; ++i) {
-          view[i] = key[i];
-      }
-      console.log(view);
       var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
       var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
       var decryptedBytes = aesCtr.decrypt(encryptedBytes);
