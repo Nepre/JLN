@@ -10,6 +10,7 @@ function createWindow () {
   mainWindow.show();
   mainWindow.setResizable(false);
   mainWindow.setMaximizable(true);
+  //mainWindow.setMenu(null);
 
 
 
