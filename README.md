@@ -1,45 +1,9 @@
-# electron-quick-start
+# JLN
 
-**Clone and run for a quick way to see Electron in action.**
+En primer lugar rechazamos seguir al pie de la letra los proyectos propuestos por la asignatura (el chat y el baúl) y decidimos ir a por algo un poco más ambicioso. Finalmente optamos por una modificación del baúl en la que en lugar de ser un simple baúl con cifrado también es un editor y gestor de archivos.
 
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
+La premisa de nuestra aplicación es que puedas crear, modificar o borrar archivos a tu antojo desde dentro de ella y que utiliza Google Drive para subir tus archivos a la nube de manera fácil, accesible y siempre cifrados de manera que solo tu puedas acceder a su contenido de manera completamente privada y segura. De este modo puedes tener tu progreso siempre guardado y a salvo de cualquier amenaza.
 
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
+Esta aplicación se basa en Google Docs, una aplicación para compartir documentos en tiempo real, pero por problemas tanto de tiempo como de desconocimiento no nos ha sido posible realizar la actualización en la nube en tiempo real. En su lugar hemos implementado un sistema parecido al de GitHub en el cual los usuarios realizan “Push” y “Pull” con el contenido de la carpeta de archivos de la aplicación de modo que esta actualiza (Google Drive en nuestro caso) o es actualizada por el contenido de la nube (Drive).
 
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
-
-## To Use
-
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-git clone https://github.com/electron/electron-quick-start
-# Go into the repository
-cd electron-quick-start
-# Install dependencies
-npm install
-# Run the app
-npm start
-```
-
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-## Resources for Learning Electron
-
-- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
-- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
-
-## License
-
-[CC0 1.0 (Public Domain)](LICENSE.md)
+Los algoritmos de cifrado que se utilizan en la aplicación son AES 512 y RSA 1024, hemos escogido estos dos entre los cientos de algoritmos debido a que su gran capacidad de protección los ha convertido en el estándar de la seguridad en cuanto a cifrado digital.
