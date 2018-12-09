@@ -11,7 +11,6 @@
     <script type="text/javascript" src="dataBase.js"></script>
     <script type="text/javascript" src="start.js"></script>
     <script type="text/javascript" src="cifrater.js"></script>
-    <script type="text/javascript" src="cifrater.js"></script>
 
     <title></title>
   </head>
@@ -27,15 +26,15 @@
       <p>Drive (Por defecto ../cifrados):</p> <input type="text" id="pathCifrado" class="input" placeholder="Directorio deseado... ">
       <br>
       <button type="button" name="button" onclick="createFile();">Crear o modificar archivo</button><br><br>
-      <button type="button" name="button" onclick="cleanFields();">Limpiar campos</button><br><br>
-      <button type="button" name="button" onclick="readFiles();">Refrescar</button>
-      <button type="button" name="button" onclick="cifrater();">Cifrar</button>
-      <button type="button" name="button" onclick="decifrater();">Descifrar</button>
+      <button type="button" name="button" onclick="closeFile();">Cerrar archivo</button><br><br>
+      <button type="button" name="button" onclick="readFiles();">Refrescar</button><br><br>
+      <button type="button" name="button" onclick="pull();">Pull</button><br><br>
+      <button type="button" name="button" onclick="push();">Push</button>
     </div>
     <div class="main">
       <h1>JLN</h1>
       <input type="text" name="" placeholder="Titulo" id="tit" class="input" class="titulo">
-      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..." onchange="createFile();"></textarea>
+      <textarea name="name" rows="8" cols="80" id="text" placeholder="Texto..." onchange="createFile(); pleaseEncryptMe(this);"></textarea>
       <br>
     </div>
     <div class="right">
@@ -52,6 +51,6 @@
       start();
       require('./renderer.js');
       require('./dataBase.js');
-      
+
   </script>
 </html>

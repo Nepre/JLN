@@ -3,7 +3,7 @@
 // All of the Node.js APIs are available in this process.
 
 var fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
-var defaultPath = "C:/apaso/";
+var defaultPath = document.getElementById("path");
 var mkdirp = require('mkdirp');
 
 function createFile()
@@ -200,4 +200,153 @@ function closeError()
 function closeFile(){
     document.getElementById("tit").disabled = false;
     cleanFields();
+}
+
+function pull(){
+
+
+    //Variable de string del principio y contador del while
+    let file = "file";
+    let i = 0;
+
+    //Booleano para cuando lleguemos al final
+    let end = false;
+    let filename;
+
+    //Paths y error
+    let pathDrive, pathCifrado;
+    let err = false;
+
+    //Recorremos el listado de archivos hasta que no encontremos txt
+    //y los copiamos
+    fs.readFile('./options.json', (err, data) => {
+
+      optionsJSON = JSON.parse(data);
+
+      if (err)
+      {
+
+        printMSG("No se han podido abrir las opciones");
+        return;
+
+      }
+
+      if(optionsJSON.hasOwnProperty('pathDrive'))
+        pathDrive = optionsJSON.pathDrive;
+      else
+        err = true;
+
+      if(optionsJSON.hasOwnProperty('pathCifrado'))
+        pathCifrado = optionsJSON.pathCifrado;
+      else
+        err = true;
+
+      console.log(pathDrive);
+        fs.readdir(pathDrive, function(err, filenames)
+        {
+
+          if (err) {
+
+            onError(err);
+            return;
+
+          }
+
+          filenames.sort();
+
+          let i = 0;
+
+          while (!end && !err) {
+            console.log(filenames[i]);
+            if(filenames[i] == undefined){
+              err = true;
+              console.log("err");
+            }
+            else{
+              copyFile(pathDrive+"/"+filenames[i], pathCifrado+"/"+filenames[i]);
+            }
+            i++;
+
+          }
+
+          printMSG("Se ha hecho pull correctamente.")
+        });
+
+    });
+
+
+}
+
+function push(){
+
+  //Variable de string del principio y contador del while
+  let file = "file";
+  let i = 0;
+
+  //Booleano para cuando lleguemos al final
+  let end = false;
+  let filename;
+
+  //Paths y error
+  let pathDrive, pathCifrado;
+  let err = false;
+
+  //Recorremos el listado de archivos hasta que no encontremos txt
+  //y los copiamos
+  fs.readFile('./options.json', (err, data) => {
+
+    optionsJSON = JSON.parse(data);
+
+    if (err)
+    {
+
+      printMSG("No se han podido abrir las opciones");
+      return;
+
+    }
+
+    if(optionsJSON.hasOwnProperty('pathDrive'))
+      pathDrive = optionsJSON.pathDrive;
+    else
+      err = true;
+
+    if(optionsJSON.hasOwnProperty('pathCifrado'))
+      pathCifrado = optionsJSON.pathCifrado;
+    else
+      err = true;
+
+    console.log(pathCifrado);
+      fs.readdir(pathCifrado, function(err, filenames)
+      {
+
+        if (err) {
+
+          onError(err);
+          return;
+
+        }
+
+        filenames.sort();
+
+        let i = 0;
+
+        while (!end && !err) {
+          console.log(filenames[i]);
+          if(filenames[i] == undefined || filenames[i].split(".")[1]!="txt"){
+            err = true;
+            console.log("err");
+          }
+          else{
+            copyFile(pathCifrado+"/"+filenames[i], pathDrive+"/"+filenames[i]);
+          }
+          i++;
+
+        }
+        printMSG("Se ha hecho push correctamente.");
+      });
+
+  });
+
+
+
 }

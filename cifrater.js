@@ -6,21 +6,21 @@ var aesjs = require('aes-js');
 var pbkdf2 = require('pbkdf2');
 var defaultPath = "C:/apaso/";
 var path = "C:/apaso/cifrados/";
-  var arra = new Uint8Array(10);
-  var PassPhrase = crypto.getRandomValues(arra);
-  var Bits = 1024;
+var arra = new Uint8Array(10);
+var PassPhrase = crypto.getRandomValues(arra);
+var Bits = 1024;
 
-  var RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
-  var PublicKeyString = cryptico.publicKeyString(RSAkey);
+var RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
+var PublicKeyString = cryptico.publicKeyString(RSAkey);
 
-function cifrater(){
+function cifrater(filename){
 
   let dirname = defaultPath;
 
   if(document.getElementById("path").value != "")
     dirname = document.getElementById("path").value;
 
-  let fileNameTxt = document.getElementsByClassName("file0")[0].innerHTML;
+  let fileNameTxt = filename;
   let filePathAndName = dirname + "/" + fileNameTxt;
     console.log(filePathAndName);
 
@@ -29,6 +29,7 @@ function cifrater(){
     if (err)
     {
         console.log("error");
+        return;
     }
     let file = data;
     // document.getElementById("error").innerHTML = file;
@@ -73,14 +74,14 @@ function cifrater(){
   });
 }
 
-function decifrater(){
+function decifrater(filename){
 
   let dirname = path;
 
   if(document.getElementById("path").value != "")
     dirname = document.getElementById("path").value;
 
-  let fileNameTxt = document.getElementsByClassName("file0")[0].innerHTML;
+  let fileNameTxt = filename;
   let filePathAndName = dirname + "/cifrados/" + fileNameTxt;
     console.log(filePathAndName);
 
@@ -89,6 +90,7 @@ function decifrater(){
     if (err)
     {
         console.log("error");
+        fs.writeFileSync('filePathAndName', "")
     }
     let file = data;
     var encryptedHex = file.toString();
@@ -102,12 +104,14 @@ function decifrater(){
       {
           console.log("error");
       }
-      let file1 = data;
-      console.log(file1.toString());
-      var DecryptionResult = cryptico.decrypt(file1.toString(), RSAkey);
-      console.log(DecryptionResult);
-      var key = Encodeuint8arr(DecryptionResult.plaintext);
+      var key = data;
       console.log(key);
+      var ab = new ArrayBuffer(key.length);
+      var view = new Uint8Array(ab);
+      for (var i = 0; i < key.length; ++i) {
+          view[i] = key[i];
+      }
+      console.log(view);
       var encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
       var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
       var decryptedBytes = aesCtr.decrypt(encryptedBytes);
@@ -132,4 +136,16 @@ function Decodeuint8arr(uint8array){
 
 function Encodeuint8arr(myString){
     return new TextEncoder("utf-8").encode(myString);
+}
+
+function pleaseEncryptMe(thisThing){
+  let fileNameTxt;
+
+  if(thisThing != undefined){
+    fileNameTxt = document.getElementsByClassName(thisThing.className)[0].innerHTML;ç
+    encrypt(fileNameTxt);
+  }
+
+
+
 }

@@ -3,6 +3,72 @@ function start() {
   startCheckFolders();
 }
 
+function decryptAndEncryptAll(path, pathCifrado){
+
+  console.log(path, pathCifrado);
+
+  encryptAll(path);
+  decryptAll(pathCifrado);
+
+}
+
+function encryptAll(path) {
+
+  var dirname = path;
+
+  fs.readdir(dirname, function(err, filenames)
+  {
+
+    if (err) {
+
+      printMSG("Ha habido un error leyendo los directorios para encriptar.");
+
+    }
+
+    filenames.sort();
+
+    let i = 0;
+    console.log("Encrypt:");
+    filenames.forEach(function(filename) {
+      console.log(filename);
+      if(filename.split(".")[1] == "txt") cifrater(filename);
+
+    });
+  });
+
+
+}
+
+function decryptAll(pathCifrado) {
+
+  var dirname = pathCifrado;
+
+  fs.readdir(dirname, function(err, filenames)
+  {
+
+    if (err) {
+
+      mkdirp(dirname, function(err) {
+      });
+      decryptAll();
+
+    }
+
+    filenames.sort();
+
+    let i = 0;
+    console.log("Descencrypt:");
+    filenames.forEach(function(filename) {
+     console.log(filename);
+
+     if(filename.split(".")[1] == "txt" && filename.split("-")[1] != "key.txt") decifrater(filename);
+
+    });
+  });
+
+
+}
+
 function startCheckFolders() {
 
   fs.readFile('./options.json', (err, data) => {

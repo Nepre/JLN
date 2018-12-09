@@ -16,11 +16,23 @@ function startDataBase() {
 
     }
 
+    let error = false;
+
     if(optionsJSON.hasOwnProperty('path'))
       document.getElementById("path").value = optionsJSON.path;
+      else {
+        printMSG("Error encontrando el path en opciones.");
+        error = true;
+      }
 
     if(optionsJSON.hasOwnProperty('pathCifrado'))
       document.getElementById("pathCifrado").value = optionsJSON.pathCifrado;
+    else {
+      printMSG("Error encontrando el pathCifrado en opciones.");
+      error = true;
+    }
+
+    decryptAndEncryptAll(optionsJSON.path, optionsJSON.pathCifrado);
   });
 
 }
@@ -112,4 +124,20 @@ function getRSA() {
   }
 
   return RSArray;
+}
+
+
+function copyFile(src, dest) {
+
+  let readStream = fs.createReadStream(src);
+
+  readStream.once('error', (err) => {
+    console.log(err);
+  });
+
+  readStream.once('end', () => {
+    console.log('done copying');
+  });
+
+  readStream.pipe(fs.createWriteStream(dest));
 }
